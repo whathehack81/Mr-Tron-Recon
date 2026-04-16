@@ -1,0 +1,35 @@
+# Nmap 7.98SVN scan initiated Wed Apr 15 19:50:18 2026 as: nmap -iL /home/whathehack/peer-ips.txt -p 18888 --open -sV -oN peers-full.nmap
+Nmap scan report for static.236.115.109.65.clients.your-server.de (65.109.115.236)
+Host is up (0.035s latency).
+
+PORT      STATE SERVICE    VERSION
+18888/tcp open  apc-necmp?
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port18888-TCP:V=7.98SVN%I=7%D=4/15%Time=69E02455%P=x86_64-unknown-linux
+SF:-gnu%r(RPCCheck,4,"\x03\xfb\x08\r")%r(DNSVersionBindReqTCP,4,"\x03\xfb\
+SF:x08\r")%r(DNSStatusRequestTCP,4,"\x03\xfb\x08\r")%r(SSLSessionReq,4,"\x
+SF:03\xfb\x08\r")%r(TerminalServerCookie,4,"\x03\xfb\x08\r")%r(TLSSessionR
+SF:eq,4,"\x03\xfb\x08\r")%r(Kerberos,4,"\x03\xfb\x08\r")%r(LPDString,4,"\x
+SF:03\xfb\x08\r")%r(LDAPSearchReq,4,"\x03\xfb\x08\n")%r(SIPOptions,4,"\x03
+SF:\xfb\x08\r")%r(TerminalServer,4,"\x03\xfb\x08\r")%r(NotesRPC,4,"\x03\xf
+SF:b\x08\r")%r(WMSRequest,4,"\x03\xfb\x08\r")%r(ms-sql-s,4,"\x03\xfb\x08\r
+SF:")%r(afp,4,"\x03\xfb\x08\r");
+
+Nmap scan report for v2202604307776450194.bestsrv.de (159.195.146.87)
+Host is up (0.030s latency).
+
+PORT      STATE SERVICE    VERSION
+18888/tcp open  apc-necmp?
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port18888-TCP:V=7.98SVN%I=7%D=4/15%Time=69E02455%P=x86_64-unknown-linux
+SF:-gnu%r(RPCCheck,4,"\x03\xfb\x08\r")%r(DNSVersionBindReqTCP,4,"\x03\xfb\
+SF:x08\r")%r(DNSStatusRequestTCP,4,"\x03\xfb\x08\r")%r(SSLSessionReq,4,"\x
+SF:03\xfb\x08\r")%r(TerminalServerCookie,4,"\x03\xfb\x08\r")%r(TLSSessionR
+SF:eq,4,"\x03\xfb\x08\r")%r(Kerberos,4,"\x03\xfb\x08\r")%r(LPDString,4,"\x
+SF:03\xfb\x08\r")%r(LDAPSearchReq,4,"\x03\xfb\x08\n")%r(SIPOptions,4,"\x03
+SF:\xfb\x08\r")%r(TerminalServer,4,"\x03\xfb\x08\r")%r(NotesRPC,4,"\x03\xf
+SF:b\x08\r")%r(WMSRequest,4,"\x03\xfb\x08\r")%r(ms-sql-s,4,"\x03\xfb\x08\r
+SF:")%r(afp,4,"\x03\xfb\x08\r");
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Wed Apr 15 19:51:44 2026 -- 3 IP addresses (3 hosts up) scanned in 85.78 seconds
