@@ -8,4 +8,4 @@ Do not test public TRON infrastructure. Reproduction must be limited to an isola
 
 Report potential TRON vulnerabilities through the official HackerOne program or the security contact published by the project.
 
-Associated private disclosure: HackerOne report `#3676543`.
+The historical disclosure associated with this repository is closed and was determined invalid / not reportable. Private report identifiers, correspondence, and attachments are not published here.
