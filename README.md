@@ -6,6 +6,6 @@ The repository previously contained live-target reproduction commands and an aut
 
 Do not test public TRON infrastructure from this repository. Any future validation must use an isolated local testnet, synthetic peers, and explicit authorization.
 
-Responsible-disclosure tracking: HackerOne report `#3676543`.
+The historical disclosure is closed and was determined invalid / not reportable. Private program identifiers and correspondence are intentionally excluded from this public repository.
 
 Technical details and reproducible evidence will remain private unless disclosure is authorized by the affected program.
