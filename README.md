@@ -1,4 +1,4 @@
-# Mr Tron Recon
+# TRON Peer-Handling Validation Archive
 
 Sanitized research notes related to TRON peer-handling behavior.
 
