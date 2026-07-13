@@ -3,11 +3,11 @@
 **Archive date:** 2026-07-13  
 **Disposition:** Invalid / not reportable  
 **Disclosure status:** Closed; no active report  
-**Historical tracker:** HackerOne `#3676543`
+**Historical tracker:** Private reference retained outside this public repository
 
 ## Purpose
 
-Preserve the investigation history, invalidation analysis, cleanup actions, and requirements for any future authorized validation without retaining live infrastructure addresses, operational denial-of-service commands, or executable impact workflows.
+Preserve the investigation history, invalidation analysis, cleanup actions, and requirements for any future authorized validation without retaining live infrastructure addresses, private program identifiers, operational denial-of-service commands, or executable impact workflows.
 
 ## Original hypothesis
 
@@ -70,10 +70,12 @@ The following operational artifacts were removed from the default branch:
 
 - Automatic live-target workflow.
 - Manual traffic-generation workflow.
+- Residual nested PoC workflow artifact.
 - Live peer target list.
 - Network scan output containing public infrastructure details.
 - Public reproduction commands.
 - Unsupported severity and impact claims.
+- Private program identifier from public documentation.
 
 The repository README and security notice were replaced with sanitized disclosure guidance.
 
@@ -118,6 +120,6 @@ Do not add any of the following to this public repository:
 - Workflows that transmit attack traffic.
 - Webhook or exfiltration endpoints.
 - Unverified severity claims.
-- Private program correspondence or attachments.
+- Private report identifiers, program correspondence, or attachments.
 
 Store sensitive raw evidence only in the private research workspace associated with the authorized engagement.
