@@ -1,23 +1,23 @@
-# Sanitized TRON P2P Investigation Archive
+# TRON Peer-Handling Validation Notes
 
 **Archive date:** 2026-07-13  
 **Disposition:** Invalid / not reportable  
 **Disclosure status:** Closed; no active report  
 **Historical tracker:** Private reference retained outside this public repository
 
-## Purpose
+## Archive purpose
 
 Preserve the investigation history, invalidation analysis, cleanup actions, and requirements for any future authorized validation without retaining live infrastructure addresses, private program identifiers, operational denial-of-service commands, or executable impact workflows.
 
-## Original hypothesis
+## Initial question
 
 The investigation considered whether unauthenticated malformed traffic sent to the TRON peer service could trigger disproportionate resource consumption, disconnect churn, synchronization loss, or node availability degradation.
 
 The repository later contained GitHub Actions workflows intended to demonstrate this hypothesis. Those workflows did not establish target-side product impact.
 
-## Why the prior workflow was invalid
+## Why the earlier tests did not validate the hypothesis
 
-### Automatic workflow
+### Automated test
 
 The removed automatic workflow:
 
@@ -32,7 +32,7 @@ The local CPU load was self-inflicted runner activity and could not support a cl
 
 The network command used ICMP mode rather than a valid TRON P2P exchange. A destination-port argument did not convert that traffic into protocol-valid TRON peer traffic.
 
-### Manual workflow
+### Manual test
 
 The removed manual workflow:
 
@@ -43,7 +43,7 @@ The removed manual workflow:
 
 It therefore demonstrated neither parser reachability nor product impact.
 
-## Missing evidence
+## Evidence gaps
 
 The prior material did not contain:
 
@@ -56,7 +56,7 @@ The prior material did not contain:
 - Evidence that low-bandwidth attacker traffic caused disproportionate target impact.
 - Reproduction independent of generic volumetric flooding.
 
-## Final security determination
+## Final assessment
 
 The repository artifacts were insufficient to establish a vulnerability.
 
@@ -64,7 +64,7 @@ The repository artifacts were insufficient to establish a vulnerability.
 **Severity:** None  
 **Required action:** Repository hygiene only; no further disclosure activity.
 
-## Cleanup record
+## Repository cleanup record
 
 The following operational artifacts were removed from the default branch:
 
@@ -77,9 +77,9 @@ The following operational artifacts were removed from the default branch:
 - Unsupported severity and impact claims.
 - Private program identifier from public documentation.
 
-The repository README and security notice were replaced with sanitized disclosure guidance.
+The repository README and responsible-research notice were replaced with sanitized guidance.
 
-## Requirements for any future investigation
+## Requirements for future validation
 
 Future work must begin from a new hypothesis and use an isolated, explicitly authorized environment.
 
@@ -96,7 +96,7 @@ Minimum validation standard:
 9. Separate parser or state-machine impact from generic bandwidth exhaustion.
 10. Stop testing immediately if traffic leaves the isolated environment.
 
-## Advancement criteria
+## Evidence threshold
 
 Advance a future finding only when all of the following are present:
 
@@ -110,7 +110,7 @@ Advance a future finding only when all of the following are present:
 
 Otherwise, park the lane as unsupported.
 
-## Safety constraints
+## Repository boundaries
 
 Do not add any of the following to this public repository:
 
