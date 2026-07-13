@@ -1,4 +1,4 @@
-# Security and Responsible Disclosure
+# Responsible Research Guidance
 
 This repository contains sanitized notes associated with previously reported TRON peer-handling research.
 
